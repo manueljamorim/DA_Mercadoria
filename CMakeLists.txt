@@ -3,4 +3,4 @@ project(DA_Mercadoria)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(DA_Mercadoria main.cpp)
+add_executable(DA_Mercadoria main.cpp LoadData.h LoadData.cpp)

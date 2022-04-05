@@ -1,6 +1,12 @@
 #include <iostream>
+#include "LoadData.h"
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+
+    LoadData ld;
+    ld.loadCarrinhas();
+    ld.loadEncomendas();
+
+
     return 0;
 }
