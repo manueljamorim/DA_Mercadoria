@@ -13,13 +13,13 @@ void LoadData::loadCarrinhas() {
     vector<string> parsed_string;
     getline(MyReadFile,textLine); //discard first line
     while (getline (MyReadFile, textLine)) {
-        vector<int> carrinha;
+        Carrinha carrinha;
         textLine.pop_back(); //remove r
         string del = " ";
         parsed_string = split(textLine,del);
-        for(string s: parsed_string){
-            carrinha.push_back(stoi(s));
-        }
+        carrinha.volMax = stoi(parsed_string[0]);
+        carrinha.pesoMax = stoi(parsed_string[1]);
+        carrinha.custo = stoi(parsed_string[2]);
         carrinhas.push_back(carrinha);
     }
 
@@ -38,13 +38,14 @@ void LoadData::loadEncomendas() {
     vector<string> parsed_string;
     getline(MyReadFile,textLine); //discard first line
     while (getline (MyReadFile, textLine)) {
-        vector<int> encomenda;
+        Encomenda encomenda;
         textLine.pop_back(); //remove r
         string del = " ";
         parsed_string = split(textLine,del);
-        for(string s: parsed_string){
-            encomenda.push_back(stoi(s));
-        }
+        encomenda.volume = stoi(parsed_string[0]);
+        encomenda.peso = stoi(parsed_string[1]);
+        encomenda.recompensa = stoi(parsed_string[2]);
+        encomenda.duracao = stoi(parsed_string[3]);
         encomendas.push_back(encomenda);
     }
 

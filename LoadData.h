@@ -7,13 +7,29 @@
 
 using namespace std;
 
+class Carrinha{
+public:
+    int volMax, pesoMax, custo;
+    bool used = 0;
+};
+
+class Encomenda{
+public:
+    int volume, peso, recompensa, duracao;
+
+    int indexCarrinha;
+};
+
 
 class LoadData{
-    vector<vector<int>> carrinhas; //volMax pesoMax custo
-    vector<vector<int>> encomendas; //volume peso recompensa duração(s)
+
+
+public:
+    vector<Carrinha> carrinhas; //volMax pesoMax custo
+    vector<Encomenda> encomendas; //volume peso recompensa duração(s)
     vector<string> split(const string &s,const string &del);
 
-    public:
+public:
     void loadCarrinhas();
     void loadEncomendas();
 
