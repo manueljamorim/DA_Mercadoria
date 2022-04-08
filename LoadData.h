@@ -17,7 +17,6 @@ class Encomenda{
 public:
     int volume, peso, recompensa, duracao;
 
-    int indexCarrinha;
 };
 
 

@@ -35,18 +35,18 @@ struct max_average
 {
     inline bool operator() (const Carrinha& a, const Carrinha& b)
     {
-        return (((a.pesoMax + a.volMax)/2.0)> (a.pesoMax + a.volMax)/2.0);
+        return (((a.pesoMax + a.volMax)/2.0)> ((a.pesoMax + a.volMax)/2.0));
     }
 };
 
 
 int Task1::Greedy() {
 
-    sort(loadData.carrinhas.begin(),loadData.carrinhas.end(),max_average());
-
     int countNumCarrinhas = 0;
 
     for(Encomenda& encomenda: loadData.encomendas){
+        sort(loadData.carrinhas.begin(),loadData.carrinhas.end(),max_peso());
+
         bool placed = 0;
         for(int i=0; i<loadData.carrinhas.size(); i++){ //dar preferencia a carrinhas já ocupadas
             if(loadData.carrinhas[i].used &&
@@ -82,7 +82,7 @@ int Task1::Greedy() {
 
 }
 //Max volume solucao: 24
- //Max peso solucao: 23
+//Max peso solucao: 23
  //Max average solucao: 24
 
 
