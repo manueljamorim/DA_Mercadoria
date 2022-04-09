@@ -3,6 +3,12 @@
 
 
 #include "LoadData.h"
+#include <algorithm>
+
+#include <iostream>
+#include <numeric>
+#include <vector>
+
 
 class Task1 {
     LoadData loadData;
@@ -10,6 +16,8 @@ class Task1 {
     public:
     Task1(LoadData& ld){this->loadData = ld;};
     int Greedy();
+    int Solver();
+
 
 
 };

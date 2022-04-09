@@ -21,6 +21,10 @@ void LoadData::loadCarrinhas() {
         carrinha.pesoMax = stoi(parsed_string[1]);
         carrinha.custo = stoi(parsed_string[2]);
         carrinhas.push_back(carrinha);
+
+        //Importante para o solver
+        volMaxs.push_back(stoi(parsed_string[0]));
+        pesoMaxs.push_back(stoi(parsed_string[1]));
     }
 
     MyReadFile.close();
@@ -47,6 +51,9 @@ void LoadData::loadEncomendas() {
         encomenda.recompensa = stoi(parsed_string[2]);
         encomenda.duracao = stoi(parsed_string[3]);
         encomendas.push_back(encomenda);
+
+        volumes.push_back(stoi(parsed_string[0]));
+        pesos.push_back(stoi(parsed_string[1]));
     }
 
     MyReadFile.close();

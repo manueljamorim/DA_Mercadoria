@@ -81,6 +81,19 @@ int Task1::Greedy() {
 
 
 }
+
+
+int Task1::Solver() {
+    const std::vector<double> weights = {48, 30, 19, 36, 36, 27,
+                                         42, 42, 36, 24, 30};
+    const int num_items = weights.size();
+    const int num_bins = weights.size();
+    const int bin_capacity = 100;
+
+
+
+    return 0;
+}
 //Max volume solucao: 24
 //Max peso solucao: 23
  //Max average solucao: 24

@@ -26,6 +26,12 @@ class LoadData{
 public:
     vector<Carrinha> carrinhas; //volMax pesoMax custo
     vector<Encomenda> encomendas; //volume peso recompensa duração(s)
+
+    vector<int> volMaxs;
+    vector<int> pesoMaxs;
+    vector<int> volumes;
+    vector<int> pesos;
+
     vector<string> split(const string &s,const string &del);
 
 public:
