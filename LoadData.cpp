@@ -3,7 +3,7 @@
 void LoadData::loadCarrinhas() {
     string textLine;
 
-    ifstream MyReadFile("/Users/Manel/Documents/GitHub/DA_Mercadoria/carrinhas.txt");
+    ifstream MyReadFile("/Users/Manel/Documents/GitHub/DA_Mercadoria/DA_Mercadoria/carrinhas.txt");
 
     if(!MyReadFile.is_open()) {
         cout << "ERRO";
@@ -22,9 +22,7 @@ void LoadData::loadCarrinhas() {
         carrinha.custo = stoi(parsed_string[2]);
         carrinhas.push_back(carrinha);
 
-        //Importante para o solver
-        volMaxs.push_back(stoi(parsed_string[0]));
-        pesoMaxs.push_back(stoi(parsed_string[1]));
+
     }
 
     MyReadFile.close();
@@ -32,7 +30,7 @@ void LoadData::loadCarrinhas() {
 void LoadData::loadEncomendas() {
     string textLine;
 
-    ifstream MyReadFile("/Users/Manel/Documents/GitHub/DA_Mercadoria/encomendas.txt");
+    ifstream MyReadFile("/Users/Manel/Documents/GitHub/DA_Mercadoria/DA_Mercadoria/encomendas.txt");
 
     if(!MyReadFile.is_open()) {
         cout << "ERRO";
@@ -52,8 +50,6 @@ void LoadData::loadEncomendas() {
         encomenda.duracao = stoi(parsed_string[3]);
         encomendas.push_back(encomenda);
 
-        volumes.push_back(stoi(parsed_string[0]));
-        pesos.push_back(stoi(parsed_string[1]));
     }
 
     MyReadFile.close();
