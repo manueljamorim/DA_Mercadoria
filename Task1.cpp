@@ -34,11 +34,10 @@ struct id_sorter
 int Task1::Greedy() {
     sort(loadData.encomendas.begin(),loadData.encomendas.end(),max_average());
     int countNumCarrinhas = 0;
-
+    sort(loadData.carrinhas.begin(),loadData.carrinhas.end(),max_average());
+    
     for(Encomenda& encomenda: loadData.encomendas){
-        sort(loadData.carrinhas.begin(),loadData.carrinhas.end(),max_average());
         bool placed = 0;
-        
         
         //Finds tightest spot
         int smallest_i = -1;
