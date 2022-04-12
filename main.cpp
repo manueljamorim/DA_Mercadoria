@@ -9,6 +9,8 @@ int main() {
     LoadData ld;
     ld.loadCarrinhas();
     ld.loadEncomendas();
+    Task2 t2(ld);
+    t2.solve(); // boa sorte se chamares esta função
 
     /*
     vector<Carrinha> carrinhas;
@@ -21,6 +23,12 @@ int main() {
     encomendas.push_back({ 2, 2, 4, 1 });
     encomendas.push_back({ 4, 3, 10, 1 });
     Task2 t2(carrinhas, encomendas);
+
+    // resultado ótimo pra este exemplo é 5
+    //  encomenda 1, 2 e 4 pra carrinha 1
+    //      (3 + 8 + 4) - 10 = 5
+    //  ou encomenda 2 e 3 pra carrinha 1 e encomenda 1 e 5 pra carrinha 2
+    //      ((8 + 6) - 10) + ((10 + 3) - 12) = 5
     */
 
     Task2 t2(ld);
