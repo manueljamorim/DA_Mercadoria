@@ -1,0 +1,3 @@
+C:/Users/User/Desktop/DA_Mercadoria/build/CMakeFiles/DA_Mercadoria.dir
+C:/Users/User/Desktop/DA_Mercadoria/build/CMakeFiles/edit_cache.dir
+C:/Users/User/Desktop/DA_Mercadoria/build/CMakeFiles/rebuild_cache.dir

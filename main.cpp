@@ -1,14 +1,32 @@
 #include <iostream>
+#include <filesystem>
 #include "LoadData.h"
 #include "Task1.h"
-
+#include "Task2.h"
 
 int main() {
+
     LoadData ld;
     ld.loadCarrinhas();
     ld.loadEncomendas();
-    Task1 t1(ld);
 
+    /*
+    vector<Carrinha> carrinhas;
+    carrinhas.push_back({ 5, 6, 10 });
+    carrinhas.push_back({ 5, 6, 12 });
+    vector<Encomenda> encomendas;
+    encomendas.push_back({ 1, 1, 3, 1 });
+    encomendas.push_back({ 2, 3, 8, 1 });
+    encomendas.push_back({ 3, 1, 6, 1 });
+    encomendas.push_back({ 2, 2, 4, 1 });
+    encomendas.push_back({ 4, 3, 10, 1 });
+    Task2 t2(carrinhas, encomendas);
+    */
+
+    Task2 t2(ld);
+    t2.solve();
+    /*
+    Task1 t1(ld);
     cout << "Cenário 1: otimização do número de estafetas" << endl;
     cout << "--------------------------------------------\n" << endl;
     cout << "\t\tAlgoritmo Greedy:\n" << endl;
@@ -69,5 +87,8 @@ int main() {
         
         cout << "(p_ocup: "<< p_ocupado <<")(v_ocup: " << v_ocupado << ")" <<endl;
     }
+    */
+    return 0;
+  
 }
 

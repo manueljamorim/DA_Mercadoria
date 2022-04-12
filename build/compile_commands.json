@@ -1,0 +1,17 @@
+[
+{
+  "directory": "C:/Users/User/Desktop/DA_Mercadoria/build",
+  "command": "C:\\msys64\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe   -g -std=gnu++14 -o CMakeFiles\\DA_Mercadoria.dir\\main.cpp.obj -c C:\\Users\\User\\Desktop\\DA_Mercadoria\\main.cpp",
+  "file": "C:/Users/User/Desktop/DA_Mercadoria/main.cpp"
+},
+{
+  "directory": "C:/Users/User/Desktop/DA_Mercadoria/build",
+  "command": "C:\\msys64\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe   -g -std=gnu++14 -o CMakeFiles\\DA_Mercadoria.dir\\LoadData.cpp.obj -c C:\\Users\\User\\Desktop\\DA_Mercadoria\\LoadData.cpp",
+  "file": "C:/Users/User/Desktop/DA_Mercadoria/LoadData.cpp"
+},
+{
+  "directory": "C:/Users/User/Desktop/DA_Mercadoria/build",
+  "command": "C:\\msys64\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe   -g -std=gnu++14 -o CMakeFiles\\DA_Mercadoria.dir\\Task1.cpp.obj -c C:\\Users\\User\\Desktop\\DA_Mercadoria\\Task1.cpp",
+  "file": "C:/Users/User/Desktop/DA_Mercadoria/Task1.cpp"
+}
+]

@@ -3,7 +3,7 @@
 void LoadData::loadCarrinhas() {
     string textLine;
 
-    ifstream MyReadFile("/Users/Manel/Documents/GitHub/DA_Mercadoria/DA_Mercadoria/carrinhas.txt");
+    ifstream MyReadFile("carrinhas.txt");
 
     if(!MyReadFile.is_open()) {
         cout << "ERRO";
@@ -33,7 +33,7 @@ void LoadData::loadCarrinhas() {
 void LoadData::loadEncomendas() {
     string textLine;
 
-    ifstream MyReadFile("/Users/Manel/Documents/GitHub/DA_Mercadoria/DA_Mercadoria/encomendas.txt");
+    ifstream MyReadFile("encomendas.txt");
 
     if(!MyReadFile.is_open()) {
         cout << "ERRO";

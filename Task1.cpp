@@ -41,7 +41,7 @@ int Task1::Greedy() {
         
         //Finds tightest spot
         int smallest_i = -1;
-        float smallest_value = MAXFLOAT;
+        float smallest_value = FLT_MAX;
         
         
         for(int i=0; i<loadData.carrinhas.size(); i++){ //dar preferencia a carrinhas já ocupadas
@@ -124,7 +124,7 @@ int Task1::Solver() {
     
     for(int j=0; j<n_bins; j++){
         string number = "y:" + to_string(j);
-        char char_array[number.size() + 1];
+        char* char_array = (char*)malloc((number.size() + 1) * sizeof(char));
         strcpy(char_array, number.c_str());
         
         y.add(IloNumVar(env,0,1, ILOBOOL, char_array));
@@ -135,7 +135,7 @@ int Task1::Solver() {
         IloNumVarArray linha(env);
         for(int j=0; j<n_bins; j++){
             string number2 = "x:" + to_string(i) + "," + to_string(j);
-            char char_array2[number2.size() + 1];
+            char* char_array2 = (char*)malloc((number2.size() + 1) * sizeof(char));
             strcpy(char_array2, number2.c_str());
             
             linha.add(IloNumVar(env, 0, 1, ILOBOOL, char_array2));

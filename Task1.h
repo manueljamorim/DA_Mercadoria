@@ -8,6 +8,7 @@
 #include <iostream>
 #include <numeric>
 #include <vector>
+#include <climits>
 
 
 class Task1 {
