@@ -11,11 +11,14 @@ class Carrinha{
 public:
     int volMax, pesoMax, custo;
     bool used = 0;
+    int id_c;
 };
 
 class Encomenda{
 public:
     int volume, peso, recompensa, duracao;
+    int id_carrinha_mae;
+    int id_e;
 
 };
 

@@ -6,57 +6,64 @@
 //encomendas [0]-->volume [1]-->peso
 //Bin packing com 2 restrições (peso e volume)
 
-struct max_volume
-{
-    inline bool operator() (const Carrinha& a, const Carrinha& b)
-    {
-        return (a.volMax> b.volMax);
-    }
-    inline bool operator() (const Encomenda& a, const Encomenda& b)
-    {
-        return (a.volume> b.volume);
-    }
-};
-
-struct max_peso
-{
-    inline bool operator() (const Carrinha& a, const Carrinha& b)
-    {
-        return (a.pesoMax> b.pesoMax);
-    }
-    inline bool operator() (const Encomenda& a, const Encomenda& b)
-    {
-        return (a.peso> b.peso);
-    }
-};
-
 struct max_average
 {
     inline bool operator() (const Carrinha& a, const Carrinha& b)
     {
-        return (((a.pesoMax + a.volMax)/2.0)> ((a.pesoMax + a.volMax)/2.0));
+        double av = (a.pesoMax + a.volMax)/2.0;
+        double bv = (b.pesoMax + b.volMax)/2.0;
+        return av>bv;
+    }
+    
+    inline bool operator() (const Encomenda& a, const Encomenda& b)
+    {
+        double av = (a.peso + a.volume)/2.0;
+        double bv = (b.peso + b.volume)/2.0;
+        return av>bv;
     }
 };
 
+struct id_sorter
+{
+    inline bool operator() (const Carrinha& a, const Carrinha& b)
+    {
+        return a.id_c<b.id_c;
+    }
+};
 
 int Task1::Greedy() {
-
+    sort(loadData.encomendas.begin(),loadData.encomendas.end(),max_average());
     int countNumCarrinhas = 0;
 
     for(Encomenda& encomenda: loadData.encomendas){
-        sort(loadData.carrinhas.begin(),loadData.carrinhas.end(),max_peso());
-
+        sort(loadData.carrinhas.begin(),loadData.carrinhas.end(),max_average());
         bool placed = 0;
+        
+        
+        //Finds tightest spot
+        int smallest_i = -1;
+        float smallest_value = MAXFLOAT;
+        
+        
         for(int i=0; i<loadData.carrinhas.size(); i++){ //dar preferencia a carrinhas já ocupadas
             if(loadData.carrinhas[i].used &&
             encomenda.volume <= loadData.carrinhas[i].volMax
             && encomenda.peso <= loadData.carrinhas[i].pesoMax ){
-                loadData.carrinhas[i].pesoMax -= encomenda.peso;
-                loadData.carrinhas[i].volMax -= encomenda.volume;
-                placed = 1;
-                break;
+                if(((loadData.carrinhas[i].volMax + loadData.carrinhas[i].pesoMax)/2.0)<smallest_value){
+                    smallest_i = i;
+                    smallest_value = (loadData.carrinhas[i].volMax + loadData.carrinhas[i].pesoMax)/2.0;
+                }
             }
         }
+        
+        
+        if(smallest_i != -1){
+            loadData.carrinhas[smallest_i].pesoMax -= encomenda.peso;
+            loadData.carrinhas[smallest_i].volMax -= encomenda.volume;
+            encomenda.id_carrinha_mae = loadData.carrinhas[smallest_i].id_c;
+            placed = 1;
+        }
+        
         if(!placed){
             for(int i=0; i<loadData.carrinhas.size(); i++){ //caso nao caiba em nenhuma carrinha já ocupada
                 if(encomenda.volume <= loadData.carrinhas[i].volMax
@@ -64,6 +71,8 @@ int Task1::Greedy() {
                     loadData.carrinhas[i].pesoMax -= encomenda.peso;
                     loadData.carrinhas[i].volMax -= encomenda.volume;
                     loadData.carrinhas[i].used = 1;
+                    encomenda.id_carrinha_mae = loadData.carrinhas[i].id_c;
+                    
                     placed = 1;
                     countNumCarrinhas +=1;
                     break;}
@@ -75,12 +84,27 @@ int Task1::Greedy() {
         }
 
     }
-
+    //Informacao de saida
+    sort(loadData.carrinhas.begin(),loadData.carrinhas.end(),id_sorter());
+    
+    for(auto& carrinha: loadData.carrinhas){
+        carrinhas_usadas.push_back(carrinha.used);
+    }
+    
+    for(auto& encomenda: loadData.encomendas){
+        auto it = carrinha_encomendas.find(encomenda.id_carrinha_mae);
+        if(it != carrinha_encomendas.end()){
+            it->second.push_back(encomenda);
+        }else{
+            vector<Encomenda> a = {encomenda};
+            carrinha_encomendas.insert(pair<int,vector<Encomenda>>(encomenda.id_carrinha_mae, a));
+        }
+    }
+    
     return countNumCarrinhas;
 
 
 }
-
 
 //Utilização de solver Cplex (aplica branch and bound)
 //Necessario instalar e configurar no Visual Studio (ver no youtube)
@@ -164,12 +188,15 @@ int Task1::Solver() {
     }
     
     
-    env.out() << "Solution status = " << cplex.getStatus() << endl;
-    env.out() << "Solution value  = " << cplex.getObjValue() << endl;
+    env.out() << "Tipo de solucao: " << cplex.getStatus() << endl;
+    env.out() << "Número de estafetas utilizados: " << cplex.getObjValue() << endl;
     
     IloNumArray valsy(env);
     cplex.getValues(valsy, y);
-    env.out() << "Values   y     = " << valsy << endl;
+    
+    for(int i=0; i<valsy.getSize();i++){
+        carrinhas_usadas.push_back(valsy[i]);
+    }
     
     
     for(int i=0; i<n_items; i++){
@@ -178,7 +205,14 @@ int Task1::Solver() {
         
         for(int a=0; a<=valsx.getSize() ;a++){
             if(valsx[a]==1){
-                env.out() << "Values x[i=" << i << "] = j:" << a << endl;
+                auto it = carrinha_encomendas.find(a);
+                if(it != carrinha_encomendas.end()){
+                    it->second.push_back(loadData.encomendas[i]);
+                }else{
+                    vector<Encomenda> ae = {loadData.encomendas[i]};
+                    carrinha_encomendas.insert(pair<int,vector<Encomenda>>(a, ae));
+                }
+                
                 break;
             };
         }
@@ -188,8 +222,5 @@ int Task1::Solver() {
     return cplex.getObjValue();
 
 }
-//Max volume solucao: 24
-//Max peso solucao: 23
-//Max average solucao: 24
-//Solução otima (atraves de branch and bound): 21
+
 
