@@ -31,8 +31,6 @@ int main() {
     //      ((8 + 6) - 10) + ((10 + 3) - 12) = 5
     */
 
-    Task2 t2(ld);
-    t2.solve();
     /*
     Task1 t1(ld);
     cout << "Cenário 1: otimização do número de estafetas" << endl;
