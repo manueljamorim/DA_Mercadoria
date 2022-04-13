@@ -1,5 +1,90 @@
 #include "Task2.h"
 
+
+void Task2::test_1() {
+	data.carrinhas.push_back({ 5, 6, 10, 1 });
+	data.carrinhas.push_back({ 5, 6, 12, 1 });
+
+	data.encomendas.push_back({ 1, 1, 3, 1, 1 });
+	data.encomendas.push_back({ 2, 3, 8, 1, 2 });
+	data.encomendas.push_back({ 3, 1, 6, 1, 3 });
+	data.encomendas.push_back({ 2, 2, 4, 1, 4 });
+	data.encomendas.push_back({ 4, 3, 10, 1, 5 });
+
+	print_entry_data();
+	solve();
+	// resultado ótimo pra este exemplo é 5
+	//  encomenda 1, 2 e 4 pra carrinha 1
+	//      (3 + 8 + 4) - 10 = 5
+	//  ou encomenda 2 e 3 pra carrinha 1 e encomenda 1 e 5 pra carrinha 2
+	//      ((8 + 6) - 10) + ((10 + 3) - 12) = 5
+}
+
+void Task2::test_2() {
+	data.carrinhas.push_back({ 5, 6, 12, 1 });
+
+	data.encomendas.push_back({ 3, 1, 6, 1, 1 });
+	data.encomendas.push_back({ 2, 2, 4, 1, 1 });
+
+	print_entry_data();
+	solve();
+	// resultado ótimo pra este exemplo é 0
+	// o algoritmo não permite lucro negativo
+}
+
+void Task2::test_random(LoadData dataset) {
+	srand(time(NULL));
+
+	int n = 1 + (rand() % 10);
+	vector<int> nums;
+	for (int i = 0; i < n; i++) {
+		int choice = rand() % dataset.carrinhas.size();
+		if (count(nums.begin(), nums.end(), choice)) {
+			i--;
+			continue;
+		}
+		data.carrinhas.push_back(dataset.carrinhas.at(choice));
+		nums.push_back(choice);
+	}
+
+	nums.clear();
+	n = 1 + (rand() % 20);
+	for (int i = 0; i < n; i++) {
+		int choice = rand() % dataset.encomendas.size();
+		if (count(nums.begin(), nums.end(), choice)) {
+			i--;
+			continue;
+		}
+		data.encomendas.push_back(dataset.encomendas.at(choice));
+		nums.push_back(choice);
+	}
+
+	print_entry_data();
+	solve();
+}
+
+void Task2::test_original(LoadData& dataset) {
+	data.carrinhas = dataset.carrinhas;
+	data.encomendas = dataset.encomendas;
+
+	solve();
+}
+
+void Task2::print_entry_data() {
+	cout << setfill('=') << setw(20) << "" << "Entry data" << setw(20) << "" << endl;
+	cout << right << setfill(' ') << setw(20) << "pesoMax" << setw(10) << "volMax" << setw(10) << "custo" << endl;
+	for (int i = 0; i < data.carrinhas.size(); i++)
+		cout << setfill(' ') << "Estafeta " << left << setw(2) << data.carrinhas[i].id_c <<
+		right << setw(8) << data.carrinhas[i].volMax << setw(10) << data.carrinhas[i].pesoMax << setw(11) << data.carrinhas[i].custo << endl;
+
+	cout << endl << right << setfill(' ') << setw(20) << "peso" << setw(10) << "volume" << setw(15) << "recompensa" << endl;
+	for (int i = 0; i < data.encomendas.size(); i++) {
+		cout << "Encomenda " << left << setw(3) << data.encomendas[i].id_e <<
+			right << setw(6) << data.encomendas[i].volume << setw(10) << data.encomendas[i].peso << setw(11) << data.encomendas[i].recompensa << endl;
+	}
+	cout << setfill('=') << setw(50) << "" << endl;
+}
+
 int Task2::solve() {
 
 	// Setting up the model and environment
@@ -87,7 +172,8 @@ int Task2::solve() {
 		throw(-1);
 	}
 
-	env.out() << "Solution: " << cplex.getStatus() << endl;
+	cout << endl << setfill('=') << setw(21) << "" << "Out data" << setw(21) << "" << endl;
+ 	env.out() << "Solution: " << cplex.getStatus() << endl;
 	env.out() << "Profit: " << cplex.getObjValue() << endl;
-
+	cout << setfill('=') << setw(50) << "" << endl;
 }

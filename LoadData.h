@@ -10,6 +10,7 @@ using namespace std;
 
 class Carrinha{
 public:
+    Carrinha(int v, int p, int c, int id) : volMax(v), pesoMax(p), custo(c), id_c(id) {};
     int volMax, pesoMax, custo;
     bool used = 0;
     int id_c;
@@ -17,6 +18,7 @@ public:
 
 class Encomenda{
 public:
+    Encomenda(int v, int p, int r, int d, int id) : volume(v), peso(p), recompensa(r), duracao(d), id_e(id) {};
     int volume, peso, recompensa, duracao;
     int id_carrinha_mae;
     int id_e;
@@ -31,14 +33,8 @@ public:
     vector<Carrinha> carrinhas; //volMax pesoMax custo
     vector<Encomenda> encomendas; //volume peso recompensa duração(s)
 
-
-    vector<string> split(const string &s,const string &del);
-
-public:
     void loadCarrinhas();
     void loadEncomendas();
-
-
 
 };
 
