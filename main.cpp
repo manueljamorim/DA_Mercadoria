@@ -6,7 +6,8 @@ using namespace std;
 int main() {
 
 
-task3();
+cout << task3() << '\n';
+
 
 
 }
