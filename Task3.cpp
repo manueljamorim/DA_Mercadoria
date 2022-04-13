@@ -77,7 +77,6 @@ float task3()
 
     // ordenar----------------------------------------------------------
     int prev, next, aux;
-
     for (prev = 0; prev < tam - 1; prev++)
         for (next = prev + 1; next < tam; next++)
         {
