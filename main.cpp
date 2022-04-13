@@ -48,6 +48,7 @@ void task3_menu(LoadData ld) {
 }
 
 int main() {
+    srand(time(NULL));
 
     LoadData ld;
     ld.loadCarrinhas();

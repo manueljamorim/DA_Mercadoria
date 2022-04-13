@@ -33,8 +33,6 @@ void Task2::test_2() {
 }
 
 void Task2::test_random(LoadData dataset) {
-	srand(time(NULL));
-
 	int n = 1 + (rand() % 10);
 	vector<int> nums;
 	for (int i = 0; i < n; i++) {
