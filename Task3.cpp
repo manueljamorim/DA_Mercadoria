@@ -98,4 +98,5 @@ float task3()
     }
 
     return (float)time_cap / (float)res;
+
 }
