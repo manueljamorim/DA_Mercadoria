@@ -3,7 +3,7 @@
 
 void Task2::test_1() {
 	data.carrinhas.push_back({ 5, 6, 10, 1 });
-	data.carrinhas.push_back({ 5, 6, 12, 1 });
+	data.carrinhas.push_back({ 5, 6, 12, 2 });
 
 	data.encomendas.push_back({ 1, 1, 3, 1, 1 });
 	data.encomendas.push_back({ 2, 3, 8, 1, 2 });
@@ -24,7 +24,7 @@ void Task2::test_2() {
 	data.carrinhas.push_back({ 5, 6, 12, 1 });
 
 	data.encomendas.push_back({ 3, 1, 6, 1, 1 });
-	data.encomendas.push_back({ 2, 2, 4, 1, 1 });
+	data.encomendas.push_back({ 2, 2, 4, 1, 2 });
 
 	print_entry_data();
 	solve();
@@ -33,11 +33,12 @@ void Task2::test_2() {
 }
 
 void Task2::test_random(LoadData dataset) {
-	int n = 1 + (rand() % 10);
+	// Pick between 1 to 15 workers from the dataset
+	int n = 1 + (rand() % 15);
 	vector<int> nums;
 	for (int i = 0; i < n; i++) {
 		int choice = rand() % dataset.carrinhas.size();
-		if (count(nums.begin(), nums.end(), choice)) {
+		if (count(nums.begin(), nums.end(), choice)) { // To ensure the same worker isn't picked
 			i--;
 			continue;
 		}
@@ -46,10 +47,12 @@ void Task2::test_random(LoadData dataset) {
 	}
 
 	nums.clear();
-	n = 1 + (rand() % 20);
+
+	//Pick between 1 to 100 packages from the dataset
+	n = 1 + (rand() % 100);
 	for (int i = 0; i < n; i++) {
 		int choice = rand() % dataset.encomendas.size();
-		if (count(nums.begin(), nums.end(), choice)) {
+		if (count(nums.begin(), nums.end(), choice)) {  // To ensure the same package isn't picked
 			i--;
 			continue;
 		}
@@ -80,6 +83,10 @@ void Task2::print_entry_data() {
 		cout << "Encomenda " << left << setw(3) << data.encomendas[i].id_e <<
 			right << setw(6) << data.encomendas[i].volume << setw(10) << data.encomendas[i].peso << setw(11) << data.encomendas[i].recompensa << endl;
 	}
+
+	cout << endl;
+	cout << "Total estafetas: " << setw(4) << data.carrinhas.size() << endl;
+	cout << "Total encomendas: " << setw(3) << data.encomendas.size() << endl,
 	cout << setfill('=') << setw(50) << "" << endl;
 }
 
