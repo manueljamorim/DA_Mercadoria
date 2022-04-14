@@ -12,7 +12,6 @@ using namespace std;
 //! Print array.
 void vint_print(int a[], int size)
 {
-
     cout << "[ ";
     for (int i = 0; i < size; i++)
         cout << a[i] << " ";
@@ -25,7 +24,6 @@ float task3()
 
     string line;
     string garbage;
-    string space_delimiter = " ";
 
     int time_cap = (8 * 3600);
 
@@ -36,8 +34,8 @@ float task3()
 
     getline(MyReadFile, line); // eliminar 1º linha
 
-    while (getline(Garb, garbage))
-    { // conta as linhas
+    while (getline(Garb, garbage))// conta as linhas
+    { 
 
         nline++;
     }
@@ -45,8 +43,8 @@ float task3()
     int vtempo[nline];
     int v_cont = 0;
 
-    while (getline(MyReadFile, line))
-    { // ler linha a linha
+    while (getline(MyReadFile, line)) // ler linha a linha
+    { 
 
         string word = "";
 
@@ -72,10 +70,7 @@ float task3()
 
     int tam = sizeof(vtempo) / sizeof(int); // numero de elemntos do vetor
 
-    // cout << "Antes" << '\n';
-    // vint_print(vtempo, tam);
-
-    // ordenar----------------------------------------------------------
+    // SelectSort algorithm
     int prev, next, aux;
     for (prev = 0; prev < tam - 1; prev++)
         for (next = prev + 1; next < tam; next++)
@@ -91,11 +86,8 @@ float task3()
 
     // vetor ja esta ordenado
 
-    // cout << "Depois" << '\n';
-    // vint_print(vtempo, tam);
-
     int res = 0; // numero de encomendas realizadas
-    int sum = 0;
+    int sum = 0; // soma do tempo gasto nas entregas
 
     while (sum <= time_cap)
     {
@@ -105,7 +97,5 @@ float task3()
         res++;
     }
 
-
-
-    return (float)time_cap/(float)res;
+    return (float)time_cap / (float)res;
 }
