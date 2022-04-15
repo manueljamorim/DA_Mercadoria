@@ -19,8 +19,11 @@ void task2_menu(LoadData ld) {
     cout << "3. Random Data Test" << endl;
     cout << "4. Original Dataset Test" << endl;
     cout << "Choose which test to run (0 to return): ";
+
     cin >> input;
+    cin.clear();
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
     switch (input) {
     case '0':
         return;
@@ -57,7 +60,10 @@ int main() {
     char input;
     do {
         cout << "Choose which task to run (1-3, 0 to exit): ";
+
         cin >> input;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         switch (input) {
         case '0':

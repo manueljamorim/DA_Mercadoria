@@ -48,7 +48,7 @@ void Task2::test_random(LoadData dataset) {
 
 	nums.clear();
 
-	//Pick between 1 to 100 packages from the dataset
+	// Pick between 1 to 100 packages from the dataset
 	n = 1 + (rand() % 100);
 	for (int i = 0; i < n; i++) {
 		int choice = rand() % dataset.encomendas.size();
