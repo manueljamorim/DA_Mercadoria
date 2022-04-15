@@ -78,7 +78,7 @@ void Task2::print_entry_data() {
 		cout << setfill(' ') << "Estafeta " << left << setw(2) << data.carrinhas[i].id_c <<
 		right << setw(8) << data.carrinhas[i].volMax << setw(10) << data.carrinhas[i].pesoMax << setw(11) << data.carrinhas[i].custo << endl;
 
-	cout << endl << right << setfill(' ') << setw(20) << "peso" << setw(10) << "volume" << setw(15) << "recompensa" << endl;
+	cout << endl << right << setfill(' ') << setw(20) << "peso" << setw(10) << "volume" << setw(13) << "recompensa" << endl;
 	for (int i = 0; i < data.encomendas.size(); i++) {
 		cout << "Encomenda " << left << setw(3) << data.encomendas[i].id_e <<
 			right << setw(6) << data.encomendas[i].volume << setw(10) << data.encomendas[i].peso << setw(11) << data.encomendas[i].recompensa << endl;
