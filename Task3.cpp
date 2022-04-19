@@ -132,7 +132,7 @@ float task3()
     int res = 0; // numero de encomendas realizadas
     int sum = 0; // soma do tempo gasto nas entregas
 
-    while (sum <= time_cap)
+    while (sum + vtempo[res] <= time_cap)
     {
 
         sum = sum + vtempo[res];
@@ -140,5 +140,7 @@ float task3()
         res++;
     }
 
-    return (float)time_cap / (float)res;
+    cout << sum << '\n';
+
+    return (float)sum / (float)res;
 }
