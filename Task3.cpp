@@ -4,7 +4,9 @@
 #include <sstream>
 #include <stdio.h>
 using namespace std;
+#include "Task3.h"
 #include "vector"
+#include "LoadData.h"
 // Objetivo: minimizar a média de tempo de entrega, ou seja, maximizar o número de entregas no espaço de tempo disponivel
 
 // ordenar por ordem crescente de tempo e depois somar os tempos até dar (8h * 3600s)
@@ -76,11 +78,15 @@ void quickSort(int arr[], int start, int end)
     quickSort(arr, p + 1, end);
 }
 
-float task3()
+float Task3::solver()
 {
 
     string line;
     string garbage;
+
+
+
+
 
     int time_cap = (8 * 3600);
 
@@ -140,7 +146,6 @@ float task3()
         res++;
     }
 
-    cout << sum << '\n';
 
     return (float)sum / (float)res;
 }
