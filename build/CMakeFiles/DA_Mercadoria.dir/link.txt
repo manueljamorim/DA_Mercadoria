@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/DA_Mercadoria.dir/main.cpp.o CMakeFiles/DA_Mercadoria.dir/LoadData.cpp.o CMakeFiles/DA_Mercadoria.dir/Task3.cpp.o  -o DA_Mercadoria 

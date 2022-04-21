@@ -1,9 +1,17 @@
-#include "Task3.h"
+#include <iostream>
+#include <fstream>
+#include <string.h>
+#include <sstream>
+#include <stdio.h>
+using namespace std;
+#include "vector"
+// Objetivo: minimizar a média de tempo de entrega, ou seja, maximizar o número de entregas no espaço de tempo disponivel
 
+// ordenar por ordem crescente de tempo e depois somar os tempos até dar (8h * 3600s)
 
-
-void v_print(int a[], int size){
-
+//! Print array.
+void vint_print(int a[], int size)
+{
     cout << "[ ";
     for (int i = 0; i < size; i++)
         cout << a[i] << " ";
@@ -13,16 +21,15 @@ void v_print(int a[], int size){
 
 
 
-
-int partition(vector<Encomenda>arr, int start, int end)
+int partition(int arr[], int start, int end)
 {
 
-    int pivot = arr[start].duracao;
+    int pivot = arr[start];
 
     int count = 0;
     for (int i = start + 1; i <= end; i++)
     {
-        if (arr[i].duracao <= pivot)
+        if (arr[i] <= pivot)
             count++;
     }
 
@@ -36,12 +43,12 @@ int partition(vector<Encomenda>arr, int start, int end)
     while (i < pivotIndex && j > pivotIndex)
     {
 
-        while (arr[i].duracao <= pivot)
+        while (arr[i] <= pivot)
         {
             i++;
         }
 
-        while (arr[j].duracao > pivot)
+        while (arr[j] > pivot)
         {
             j--;
         }
@@ -56,8 +63,7 @@ int partition(vector<Encomenda>arr, int start, int end)
 }
 
 
-
-void quickSort(vector<Encomenda>arr, int start, int end)
+void quickSort(int arr[], int start, int end)
 {
 
     // caso base
@@ -73,36 +79,23 @@ void quickSort(vector<Encomenda>arr, int start, int end)
     quickSort(arr, p + 1, end);
 }
 
+float task3()
+{
 
-
-
-
-
-float Task3::solver(vector<Encomenda> encomendas){
-
-
-    const int time_cap = (8 * 3600);
-
-    /*
     string line;
-    string garbage;
+    vector<string>vtempo;
 
+    int time_cap = (8 * 3600);
 
-    int nline = -1; // iniciado a menos um pois não retirei a primeira linha no contador de linhas
-
+   
     ifstream MyReadFile("encomendas.txt");
-    ifstream Garb("encomendas.txt");
+
 
     getline(MyReadFile, line); // eliminar 1º linha
     
-    while (getline(Garb, garbage)) // conta as linhas
-    {
+    
 
-        nline++;
-    }
 
-    int vtempo[nline]; // vetor que armazena a duração de cada tarefa
-    int v_cont = 0; // index posição vetor vtempo
     
 
     while (getline(MyReadFile, line)) // ler linha a linha
@@ -132,21 +125,17 @@ float Task3::solver(vector<Encomenda> encomendas){
 
     MyReadFile.close();
 
-
-
     int tam = sizeof(vtempo) / sizeof(int); // numero de elemntos do vetor
 
-    */
-
-    quickSort(encomendas, 0, encomendas.size() - 1); /// vetor ja esta ordenado
+    quickSort(vtempo, 0, tam - 1); // vetor ja esta ordenado
 
     int res = 0; // numero de encomendas realizadas
     int sum = 0; // soma do tempo gasto nas entregas
 
-    while (sum + encomendas[res].duracao <= time_cap)
+    while (sum + vtempo[res] <= time_cap)
     {
 
-        sum = sum + encomendas[res].duracao;
+        sum = sum + vtempo[res];
 
         res++;
     }
